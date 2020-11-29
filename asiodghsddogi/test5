@@ -1,0 +1,10 @@
+GET /analytics.js HTTP/1.1
+Host: www.google-analytics.com
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: https://www.biteno.com/was-ist-tomcat/
+Connection: close
+If-Modified-Since: Fri, 23 Oct 2020 03:00:57 GMT
+

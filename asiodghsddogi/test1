@@ -1,0 +1,10 @@
+GET / HTTP/1.1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0
+Accept-Encoding: gzip, deflate
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Connection: close
+Host: www.google.com
+Accept-Language: en-US,en;q=0.5
+Cookie: NID=204=Hk4XUfhDhRtG9VD5A1IDWNsiOa3Ph78elqQh37a21ZmolvqgyBoAWiSwTvix3hHkHZyK2qsE9JFYvPFpnLg5iCQJlJXlMQLNxul4hKniDg5fXgXaLNRRQVRZy7UZgamNNY8zuklwP79IYApMNt6VgrRr7QU-O9H62WPsfz9sU_0; CONSENT=YES+DE.de+V14+BX; ANID=AHWqTUm_RmFM6KJIpmiyyZtKgehLiCCmfptUMeEatYGe3UMunYXdnZnrDfL_XBDY; 1P_JAR=2020-11-15-21; OGPC=19021554-1:
+Upgrade-Insecure-Requests: 1
+

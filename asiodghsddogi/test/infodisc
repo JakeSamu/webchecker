@@ -1,0 +1,45 @@
+In dem folgenden HTTP-Request mitsamt Response sind an den gelb markierten Stellen Informationspreisgaben zu erkennen. Diese sind: _AmazonS3_
+
+*Request:*
+
+bc.. GET / HTTP/1.1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0
+Accept-Encoding: gzip, deflate
+Accept: */*
+Connection: close
+Host: github.githubassets.com
+Accept-Language: en-US,en;q=0.5
+Referer: https://github.com/
+Origin: https://github.com
+Content-Length: 1
+
+
+
+
+
+p. *Response:*
+
+bc.. HTTP/1.1 200 OK
+Connection: close
+Content-Length: 8
+Access-Control-Allow-Methods: GET
+Access-Control-Max-Age: 3600
+Last-Modified: Mon, 05 Nov 2018 15:13:33 GMT
+ETag: "7803ffcaea43bb81a439fde13b29bc35"
+Content-Type: text/html
+<mark:yellow>Server: AmazonS3</mark>
+Via: 1.1 varnish, 1.1 varnish
+Accept-Ranges: bytes
+Date: Sun, 29 Nov 2020 11:58:28 GMT
+Age: 5248
+X-Served-By: cache-dca17749-DCA, cache-fra19134-FRA
+X-Cache: HIT, HIT
+X-Cache-Hits: 1, 1
+X-Timer: S1606651109.602751,VS0,VE1
+Vary: Origin, Access-Control-Request-Headers, Access-Control-Request-Method, Accept-Encoding
+Access-Control-Allow-Origin: *
+X-Fastly-Request-ID: c136b8936782d5268b0679663c7f9869a1602e6c
+
+Welcome
+
+p. 

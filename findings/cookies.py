@@ -1,0 +1,44 @@
+import template
+from main import format
+from findings import finding
+text_httponly="In dem folgenden HTTP-Request mitsamt Response wird an der gelb markierten Stelle gezeigt, dass das Attribut " + template.cursive_start + "HttpOnly" + template.cursive_end + " nicht verwendet wird."
+text_secure="In dem folgenden HTTP-Request mitsamt Response wird an der gelb markierten Stelle gezeigt, dass das Attribut " + template.cursive_start + "secure" + template.cursive_end + " nicht verwendet wird."
+
+#ToDo: interactive-mode, which allows to say which cookie should be considered as what
+
+def has_http_only(cookie):
+    extra_args = cookie.__dict__.get("_rest")
+    if extra_args:
+        for key in extra_args.keys():
+            if key.lower() == "httponly":
+                return True
+    return False
+
+def cookiefinding(request, response, cookiename, type, text):
+    # ToDo: ist es möglich format.create_both zu extrahieren? besser wäre wahrscheinlich soetwas wie "1" oder "2" als Übergabe ... bis auf bei arbitrary host header ...
+    code = format.create_both(request, response, ["Set-Cookie: " + cookiename + "="])
+    finding.create_finding(type, text, code, str(cookiename))
+
+def all_cookie_findings(request, response, type, text, cookienames):
+    highlightings = []
+    for name in cookienames:
+        highlightings.append("Set-Cookie: " + name + "=")
+    code = format.create_both(request, response, highlightings)
+    finding.create_finding(type, text, code, "all")
+
+def check_cookies(request, response):
+    nothttponlycookies = []
+    notsecurecookies = []
+    for cookie in response.cookies:
+        if not cookie.secure:
+            notsecurecookies.append(cookie.name)
+            #ToDo: uncomment the next line and have a parameter to check, if every cookie should have their own file.
+            #cookiefinding(request, response, cookie.name, "cookie.secureflag", text_secure)
+        if not has_http_only(cookie):
+            nothttponlycookies.append(cookie.name)
+            #ToDo: uncomment the next line and have a parameter to check, if every cookie should have their own file.
+            #cookiefinding(request, response, cookie.name, "cookie.httponly", text_httponly)
+    if (len(nothttponlycookies) > 0):
+        all_cookie_findings(request, response, "cookie.httponly", text_httponly, nothttponlycookies)
+    if (len(notsecurecookies) > 0):
+        all_cookie_findings(request, response, "cookie.secureflag", text_secure, notsecurecookies)
