@@ -9,7 +9,7 @@ def set_url(url):
 
 def set_file(file):
     config.file = file
-    (config.method, config.header, config.body) = burpconverter.burp_to_request(file)
+    (urlpath, config.method, config.header, config.body) = burpconverter.burp_to_request(file)
 
     # ToDo: this assumes port 443, change it corresponding to input, eventually plaintext?
     if (config.tls):
@@ -19,6 +19,8 @@ def set_file(file):
         url = "http://"
         if (config.p_port != 80): url += ":" + config.p_port
     config.url = url + config.header["Host"]
+    if config.url[-1] == "/": config.url = config.url[:-1] + urlpath
+    else: config.url += urlpath
 
 
 def check_proxy(proxies=config.proxies):
@@ -33,7 +35,10 @@ def check_proxy(proxies=config.proxies):
 #ToDO: exception handling if url is wrong, no internet-connection, or if file does not exist
 
 #ToDo: make it compatible with input
-def call():
-    response = requests.request(config.method, config.url, headers=config.header, data=config.body,
+def call(addheader={}):
+    headers = config.header.copy()
+    headers.update(addheader)
+
+    response = requests.request(config.method, config.url, headers=headers, data=config.body,
                                 proxies=config.proxies, verify=config.vfy, allow_redirects=config.redirect)
     return response

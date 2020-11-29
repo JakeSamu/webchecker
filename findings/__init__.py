@@ -1,6 +1,6 @@
 #import findings.arbitraryhost
 import findings.cookies
-#import findings.cors
+import findings.cors
 #import findings.csp
 #import findings.csrf
 import findings.finding

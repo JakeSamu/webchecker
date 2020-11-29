@@ -1,8 +1,9 @@
 import template
 from main import format
 from findings import finding
-text_httponly="In dem folgenden HTTP-Request mitsamt Response wird an der gelb markierten Stelle gezeigt, dass das Attribut " + template.cursive_start + "HttpOnly" + template.cursive_end + " nicht verwendet wird."
-text_secure="In dem folgenden HTTP-Request mitsamt Response wird an der gelb markierten Stelle gezeigt, dass das Attribut " + template.cursive_start + "secure" + template.cursive_end + " nicht verwendet wird."
+
+text_httponly = "In dem folgenden HTTP-Request mitsamt Response wird an der gelb markierten Stelle gezeigt, dass das Attribut " + template.cursive_start + "HttpOnly" + template.cursive_end + " nicht verwendet wird. Die davon betroffenen Cookies sind: "
+text_secure = "In dem folgenden HTTP-Request mitsamt Response wird an der gelb markierten Stelle gezeigt, dass das Attribut " + template.cursive_start + "secure" + template.cursive_end + " nicht verwendet wird. Die davon betroffenen Cookies sind: "
 
 #ToDo: interactive-mode, which allows to say which cookie should be considered as what
 
@@ -28,17 +29,24 @@ def all_cookie_findings(request, response, type, text, cookienames):
 
 def check_cookies(request, response):
     nothttponlycookies = []
+    cookienames_http = ""
     notsecurecookies = []
+    cookienames_secure = ""
     for cookie in response.cookies:
-        if not cookie.secure:
-            notsecurecookies.append(cookie.name)
-            #ToDo: uncomment the next line and have a parameter to check, if every cookie should have their own file.
-            #cookiefinding(request, response, cookie.name, "cookie.secureflag", text_secure)
         if not has_http_only(cookie):
             nothttponlycookies.append(cookie.name)
+            cookienames_http += cookie.name + ", "
             #ToDo: uncomment the next line and have a parameter to check, if every cookie should have their own file.
             #cookiefinding(request, response, cookie.name, "cookie.httponly", text_httponly)
+        if not cookie.secure:
+            notsecurecookies.append(cookie.name)
+            cookienames_secure += cookie.name + ", "
+            #ToDo: uncomment the next line and have a parameter to check, if every cookie should have their own file.
+            #cookiefinding(request, response, cookie.name, "cookie.secureflag", text_secure)
+
     if (len(nothttponlycookies) > 0):
-        all_cookie_findings(request, response, "cookie.httponly", text_httponly, nothttponlycookies)
+        fulltext = text_httponly + template.cursive_start + cookienames_http[:-2] + template.cursive_end
+        all_cookie_findings(request, response, "cookie.httponly", fulltext, nothttponlycookies)
     if (len(notsecurecookies) > 0):
-        all_cookie_findings(request, response, "cookie.secureflag", text_secure, notsecurecookies)
+        fulltext = text_secure + template.cursive_start + cookienames_secure[:-2] + template.cursive_end
+        all_cookie_findings(request, response, "cookie.secureflag", fulltext, notsecurecookies)

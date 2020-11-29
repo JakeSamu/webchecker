@@ -1,4 +1,4 @@
-from main import format
+from main import *
 from findings import finding
 import findings.lists.infodisclist
 import template

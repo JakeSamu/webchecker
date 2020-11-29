@@ -28,9 +28,10 @@ def burp_to_request(burpfile):
     with open(burpfile, "rt") as f:
         text = removeemptylines(f.read())
         method = text.split(" ", 1)[0]
+        url = text.split(" ",2)[1]
         header = burp_get_header(text)
         body = burp_get_body(text)
-        return (method, header, body)
+        return (url, method, header, body)
 
 def burp_to_response():
     print("\'burp_to_response\' was not needed yet, so does not exists")

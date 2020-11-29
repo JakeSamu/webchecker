@@ -32,6 +32,7 @@ def highlight_ifall_inline(code, highlight):
             output = line + "\n"
     return output
 
+#ToDo: remove empty lines between header and body
 def create_both(request, response, highlightline=[""], highlightword=[""]):
     tmp = create_request(request) + create_response(response)
     if (not highlightword == [""]):

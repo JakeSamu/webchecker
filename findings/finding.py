@@ -19,8 +19,8 @@ def create_finding(type, text, code, suffix=""):
 def check_for_findings(request, response):
     print("Starting the web calls and checking for findings ...")
     #Call every finding-script here
-    #findings.cookies.check_cookies(request, response)
-    #findings.hsts.check_hsts(request, response)
+    findings.cookies.check_cookies(request, response)
+    findings.hsts.check_hsts(request, response)
     findings.infodisc.info_disc(request, response)
-    #findings.cors.check_cors(request, response)
+    findings.cors.check_cors(request, response)
     print("... done")
