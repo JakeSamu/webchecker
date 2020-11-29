@@ -1,6 +1,12 @@
 from __init__ import *
 from main import *
 
+# Ignore HTTPS warnings while using a proxy
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+# did not work:
+# os.environ['PYTHONWARNINGS'] = "ignore:Unverified HTTPS request"
+
 help = """
 NAME
     StandardWebCheck - get your standard web findings ready for your report

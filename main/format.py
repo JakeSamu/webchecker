@@ -3,7 +3,9 @@ from main import burpconverter
 
 
 def codeblock(code, title):
-    return template.bold_start + title + template.bold_end + "\n\n" + template.code_start + code + template.code_end
+    return template.bold_start + title + template.bold_end +\
+           "\n\n" +\
+           template.code_start + code + template.code_end
 
 def create_request(request):
     return codeblock(burpconverter.request_to_readable(request), "Request:")

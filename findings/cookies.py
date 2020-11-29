@@ -28,6 +28,8 @@ def all_cookie_findings(request, response, type, text, cookienames):
     finding.create_finding(type, text, code, "all")
 
 def check_cookies(request, response):
+    print("... checking cookies ...", end='')
+
     nothttponlycookies = []
     cookienames_http = ""
     notsecurecookies = []
@@ -50,3 +52,5 @@ def check_cookies(request, response):
     if (len(notsecurecookies) > 0):
         fulltext = text_secure + template.cursive_start + cookienames_secure[:-2] + template.cursive_end
         all_cookie_findings(request, response, "cookie.secureflag", fulltext, notsecurecookies)
+
+    print("")

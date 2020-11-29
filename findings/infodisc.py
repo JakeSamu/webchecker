@@ -40,6 +40,8 @@ def info_disc_body(body):
     return output
 
 def info_disc(request, response):
+    print("... checking obvious information disclosures ...", end='')
+
     headers = info_disc_headers(response.headers)
     body = info_disc_body(response.text)
 
@@ -57,3 +59,4 @@ def info_disc(request, response):
         #code = format.highlight_ifall_inline(code, body.keys())
         #ToDo: for every body finding a different file!
         finding.create_finding("infodisc", tmp, code)
+    print("")

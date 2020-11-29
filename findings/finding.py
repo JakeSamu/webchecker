@@ -4,7 +4,7 @@ import template
 import pathlib
 
 def create_finding(type, text, code, suffix=""):
-    if (config.debug): print("Finding: " + type)
+    print(" found " + type + " ... ", end='')
     filename = type
     if (suffix != ""): filename += "." + suffix
 
@@ -23,4 +23,5 @@ def check_for_findings(request, response):
     findings.hsts.check_hsts(request, response)
     findings.infodisc.info_disc(request, response)
     findings.cors.check_cors(request, response)
+    findings.arbitraryhost.check_hostheader(request, response)
     print("... done")

@@ -23,26 +23,31 @@ def check_creds(headers):
     else: return False
 
 def check_cors(request, response):
+    print("... checking CORS policy ...", end='')
+
     check_creds(response.headers)
 
-    if check_origin(response.headers):
-        text = text_origin1
-        highlight = [corsheader]
-        if check_creds(response.headers):
-            text += text_creds
-            highlight.append(credheader)
-        code = format.create_both(request, response, highlight)
-        finding.create_finding("cors", text, code)
-    else:
-        #Check if origin depends on request header.
-        addheader = {'Origin': dependencyheader, 'Referer': dependencyheader}
-        response2 = webcall.call(addheader)
-
-        text = text_origin2
-        highlight = [dependencyheader]
-        if check_origin(response2.headers, dependencyheader):
-            if check_creds(response2.headers):
+    if 'Access-Control-Allow-Origin' in response.headers:
+        if check_origin(response.headers):
+            text = text_origin1
+            highlight = [corsheader]
+            if check_creds(response.headers):
                 text += text_creds
                 highlight.append(credheader)
-            code = format.create_both(response2.request, response2, highlight)
+            code = format.create_both(request, response, highlight)
             finding.create_finding("cors", text, code)
+        else:
+            #Check if origin depends on request header.
+            addheader = {'Origin': dependencyheader, 'Referer': dependencyheader}
+            response2 = webcall.call(addheader)
+
+            text = text_origin2
+            highlight = [dependencyheader]
+            if check_origin(response2.headers, dependencyheader):
+                if check_creds(response2.headers):
+                    text += text_creds
+                    highlight.append(credheader)
+                code = format.create_both(response2.request, response2, highlight)
+                finding.create_finding("cors", text, code)
+
+    print("")
