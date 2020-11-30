@@ -8,7 +8,7 @@ vfy=True #check for proxy certificate
 
 # relative path to the folder where the output is going to be written. Remember: it overwrites files with same name!
 relative = True # Set to false, if you always want to go to a specific absolute path
-path = "asiodghsddogi/test"
+path = ""
 absolutepath = ""
 
 # Default parameters for the web calls
@@ -18,7 +18,7 @@ redirect = False
 #No change yet supported
 file = ""
 url = ""
-header = ""
+header = {}
 body = ""
 tls = True
 tls_port = 443
