@@ -57,22 +57,13 @@ def start(response):
     burpconverter.httpvers = "HTTP/" + str(response.raw.version)[:1] + "." + str(response.raw.version)[1:]  # workaround for showing the http-version
     findings.finding.check_for_findings(response.request, response)
 
-print(1)
-
 if (use_file == False and use_url == False):
     print("Neither an url nor a file was given.")
     exit(0)
 
-print(2)
 #Prepare webcall and start it
 webcall.check_proxy()
-print(3)
-print(use_file)
-print(file1)
 if (use_file): webcall.set_file(file1)
 else: webcall.set_url(url)
-print(5)
 response = webcall.call()
-print(6)
 start(response)
-print(7)
