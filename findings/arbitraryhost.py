@@ -1,3 +1,4 @@
+import config
 from main import *
 from findings import finding
 import template
@@ -30,7 +31,7 @@ def compare(response1, response2):
 def check_hostheader(request, response):
     print("... checking for arbitrary host header ...", end='')
 
-    addheader = {'Host': 'tuv.com'}
+    addheader = {'Host': config.hostname}
     response2 = webcall.call(addheader)
     highlight = ["Host"]
 

@@ -1,5 +1,5 @@
 debug=False #set to True if you want to have debugging output
-proxy=True #set to True, if you want to use the proxy defiend in proxyip
+proxy=False #set to True, if you want to use the proxy defiend in proxyip
 proxies = { #set to the IPs of the proxy if you want to use it
     'http': 'http://127.0.0.1:8080',
     'https': 'https://127.0.0.1:8080'
@@ -23,3 +23,4 @@ body = ""
 tls = True
 tls_port = 443
 p_port = 80
+hostname = 'https://github.com/JakeSamu/StandardWebFindings'
