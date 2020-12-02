@@ -7,11 +7,11 @@ def codeblock(code, title):
            "\n\n" +\
            template.code_start + code + template.code_end
 
-def create_request(request):
-    return codeblock(burpconverter.request_to_readable(request), "Request:")
+def create_request(request, title="Request:"):
+    return codeblock(burpconverter.request_to_readable(request), title)
 
-def create_response(response):
-    return codeblock(burpconverter.response_to_readable(response), "Response:")
+def create_response(response, title="Request:"):
+    return codeblock(burpconverter.response_to_readable(response), title)
 
 def highlight_line(code, highlight):
     output = ''
@@ -35,8 +35,8 @@ def highlight_ifall_inline(code, highlight):
     return output
 
 #ToDo: remove empty lines between header and body
-def create_both(request, response, highlightline=[""], highlightword=[""]):
-    tmp = create_request(request) + create_response(response)
+def create_both(request, response, highlightline=[""], highlightword=[""], reqtitle="Request:", resptitle="Response:"):
+    tmp = create_request(request, reqtitle) + create_response(response, resptitle)
     if (not highlightword == [""]):
         for ele in highlightword:
             tmp = highlight_word(tmp, ele)

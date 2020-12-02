@@ -4,7 +4,7 @@ import template
 import pathlib
 
 def create_finding(type, text, code, suffix=""):
-    print(" found " + type + " ... ", end='')
+    print(" found " + type + " ...", end='')
     filename = type
     if (suffix != ""): filename += "." + suffix
 

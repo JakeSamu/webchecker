@@ -36,8 +36,8 @@ def check_hostheader(request, response):
     highlight = ["Host"]
 
     if compare(response, response2):
-        code1 = format.create_both(response2.request, response2, highlight)
-        code2 = format.create_both(response2.request, response2, highlight)
+        code1 = format.create_both(request, response, highlight, [""], "Request 1:", "Response 1:")
+        code2 = format.create_both(response2.request, response2, highlight, [""], "Request 2:", "Response 2:")
         finding.create_finding("arbitraryhost", text, code1+code2)
 
     print("")
