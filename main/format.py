@@ -7,13 +7,30 @@ def codeblock(code, title):
            "\n\n" +\
            template.code_start + code + template.code_end
 
-def create_request(request, title="Request:"):
-    return codeblock(burpconverter.request_to_readable(request), title)
+def highlighting(text, highlightline=[""], highlightword=[""]):
+    tmp = text
+    if (not highlightword == [""]):
+        for ele in highlightword:
+            tmp = highlight_word(text, ele)
+            tmp = tmp[:-1]
+    if (not highlightline == [""]):
+        for ele in highlightline:
+            tmp = highlight_line(text, ele)
+            tmp = tmp[:-1]
+    return tmp
 
-def create_response(response, title="Request:"):
-    return codeblock(burpconverter.response_to_readable(response), title)
+def create_request(request, title="Request:", highlightline=[""], highlightword=[""]):
+    tmp = burpconverter.request_to_readable(request)
+    tmp = highlighting(tmp, highlightline, highlightword)
+    return codeblock(tmp, title)
+
+def create_response(response, title="Request:", highlightline=[""], highlightword=[""]):
+    tmp = burpconverter.response_to_readable(response)
+    tmp = highlighting(tmp, highlightline, highlightword)
+    return codeblock(tmp, title)
 
 def highlight_line(code, highlight):
+    #ToDo: change to joinsep
     output = ''
     for line in code.split("\n"):
         if highlight in line:
@@ -36,11 +53,5 @@ def highlight_ifall_inline(code, highlight):
 
 #ToDo: remove empty lines between header and body
 def create_both(request, response, highlightline=[""], highlightword=[""], reqtitle="Request:", resptitle="Response:"):
-    tmp = create_request(request, reqtitle) + create_response(response, resptitle)
-    if (not highlightword == [""]):
-        for ele in highlightword:
-            tmp = highlight_word(tmp, ele)
-    if (not highlightline == [""]):
-        for ele in highlightline:
-            tmp = highlight_line(tmp, ele)
-    return tmp
+    return create_request(request, reqtitle, highlightline, highlightword) +\
+           create_response(response, resptitle, highlightline, highlightword)

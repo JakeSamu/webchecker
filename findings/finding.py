@@ -13,8 +13,9 @@ def create_finding(type, text, code, suffix=""):
 
     if (config.debug): print("Path = " + path)
 
-    with open(path + "/" + filename, "w") as f:
-        f.write(template.template_start + text + "\n\n" + code + template.template_end)
+    if config.output:
+        with open(path + "/" + filename, "w") as f:
+            f.write(template.template_start + text + "\n\n" + code + template.template_end)
 
 def check_for_findings(request, response):
     print("Starting the web calls and checking for findings ...")

@@ -10,6 +10,7 @@ vfy=True #check for proxy certificate
 relative = True # Set to false, if you always want to go to a specific absolute path
 path = ""
 absolutepath = ""
+output = True # set to false if you do not want to save the output
 
 # Default parameters for the web calls
 method = "GET"

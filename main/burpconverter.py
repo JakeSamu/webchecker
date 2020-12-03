@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import os
+import template
 #ToDo: converts burp-copy&paste to an http-request-format and the response to the correct burp-output.
 #ToDo: only first part, second part is already done, just has to be moved here.
 global httpvers
@@ -54,11 +55,12 @@ def request_to_readable(request):
     reqbody = ''
     if (request.body):
         reqbody = "\n\n" + str(request.body)
-    return firsthead + readable_headers(request) + reqbody
+    nlines = min(template.maxbodylines, len(reqbody.splitlines()))
+    return firsthead + readable_headers(request) + os.linesep.join(str(reqbody).split(os.linesep)[:nlines])
 
 def response_to_readable(response):
     firsthead = httpvers + " " + str(response.status_code) + " " + response.reason + "\n"
     soup = BeautifulSoup(str(response.text), 'html.parser').prettify()
     # ToDo: would it be better, if the indent is setable to 2 or 3 instead of 1?
-    nlines = min(7, len(soup.splitlines()))
+    nlines = min(template.maxbodylines, len(soup.splitlines()))
     return firsthead + readable_headers(response) + "\n" + os.linesep.join(str(soup).split(os.linesep)[:nlines])

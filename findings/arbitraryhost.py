@@ -33,7 +33,7 @@ def check_hostheader(request, response):
 
     addheader = {'Host': config.hostname}
     response2 = webcall.call(addheader)
-    highlight = ["Host"]
+    highlight = ["Host: "]
 
     if compare(response, response2):
         code1 = format.create_both(request, response, highlight, [""], "Request 1:", "Response 1:")

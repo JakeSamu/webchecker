@@ -13,3 +13,5 @@ highlight_end = "</mark>"
 
 template_start = ""
 template_end = ""
+
+maxbodylines = 7
