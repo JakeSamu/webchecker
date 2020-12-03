@@ -56,6 +56,7 @@ def request_to_readable(request):
     if (request.body):
         reqbody = "\n\n" + str(request.body)
     nlines = min(template.maxbodylines, len(reqbody.splitlines()))
+    if (nlines <= 3): reqbody = reqbody[template.maxbodycharacters:]
     return firsthead + readable_headers(request) + os.linesep.join(str(reqbody).split(os.linesep)[:nlines])
 
 def response_to_readable(response):
@@ -63,4 +64,5 @@ def response_to_readable(response):
     soup = BeautifulSoup(str(response.text), 'html.parser').prettify()
     # ToDo: would it be better, if the indent is setable to 2 or 3 instead of 1?
     nlines = min(template.maxbodylines, len(soup.splitlines()))
+    if(nlines <= 3): soup = soup[template.maxbodycharacters:]
     return firsthead + readable_headers(response) + "\n" + os.linesep.join(str(soup).split(os.linesep)[:nlines])
