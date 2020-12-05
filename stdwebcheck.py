@@ -24,7 +24,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument('-f','--file', type=str, help='Use a file that contains a copy of burp request',default=config.file)
 parser.add_argument('-u','--url', type=str, help='Standard webcall to given url',default=config.url)
-parser.add_argument('-v','--verbose', type=str2bool, nargs='?', const=True, default=False,help='Detailed output',default=config.debug)
+parser.add_argument('-v','--verbose', type=str2bool, nargs='?', const=True, help='Detailed output',default=config.debug)
 parser.add_argument('-dr','--dir', type=str, help='Define the directory which is used to save all the files into. Without this option the current directory is used',default=config.path)
 parser.add_argument('-da', type=str, help='Absolute path',default=config.relative)
 
