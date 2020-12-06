@@ -1,15 +1,12 @@
 from __init__ import *
 from main import *
+import argparse
 
 # Ignore HTTPS warnings while using a proxy
 import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-# did not work:
-# os.environ['PYTHONWARNINGS'] = "ignore:Unverified HTTPS request"
 
-import argparse
-
-
+#Allow several arguments besides True and False
 def str2bool(v):
     if isinstance(v, bool):
        return v
@@ -22,36 +19,36 @@ def str2bool(v):
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument('-f','--file', type=str, help='Use a file that contains a copy of burp request',default=config.file)
-parser.add_argument('-u','--url', type=str, help='Standard webcall to given url',default=config.url)
-parser.add_argument('-v','--verbose', type=str2bool, nargs='?', const=True, help='Detailed output',default=config.debug)
-parser.add_argument('-dr','--dir', type=str, help='Define the directory which is used to save all the files into. Without this option the current directory is used',default=config.path)
-parser.add_argument('-da', type=str, help='Absolute path',default=config.relative)
+parser.add_argument('-f', '--file',     type=str,       default=config.file,        help='Use a file that contains a copy of burp request')
+parser.add_argument('-u', '--url',      type=str,       default=config.url,         help='Standard webcall to given url')
+parser.add_argument('-v', '--verbose',  type=str2bool,  default=config.debug,       help='Detailed output', nargs='?', const=True)
+parser.add_argument('-dr', '--dir',     type=str,       default=config.relativepath,        help='Define the directory which is used to save all the files into. Without this option the current directory is used')
+parser.add_argument('-da',              type=str,       default=config.relative,    help='Absolute path')
 
 
 soon = parser.add_argument_group('Coming soon')
-soon.add_argument('-m','--method', type=str, help='Only works with usage of url, defines the method. Default is GET', default=config.method)
-soon.add_argument('-p','--port', type=str, help='Only works with usage of file, use this if the standard port is not in use (443 or 80)',default="")
-soon.add_argument('-c','--clear', type=str, help='Use this if the target is not using TLS or SSL',default="")
-soon.add_argument('--interactive', type=str, help='(Dachte dabei an soetwas wie bei jedem einzelnen Finding ja nein drücken, oder auch paramter dabei zu ändern ... ist natürlich viel Aufwand ...',default="")
-soon.add_argument('--proxy', type=str, help='',default="")
-soon.add_argument('--redirect', type=str, help='',default="")
-soon.add_argument('--follow', type=str, help='',default="")
+soon.add_argument('-m', '--method',     type=str,       default=config.method,      help='Only works with usage of url, defines the method. Default is GET')
+soon.add_argument('-p', '--port',       type=str,       default="",                 help='Only works with usage of file, use this if the standard port is not in use (443 or 80)')
+soon.add_argument('-c', '--clear',      type=str,       default="",                 help='Use this if the target is not using TLS or SSL')
+soon.add_argument('--interactive',      type=str,       default="",                 help='(Dachte dabei an soetwas wie bei jedem einzelnen Finding ja nein drücken, oder auch paramter dabei zu ändern ... ist natürlich viel Aufwand ...')
+soon.add_argument('--proxy',            type=str,       default="",                 help='')
+soon.add_argument('--redirect',         type=str,       default="",                 help='')
+soon.add_argument('--follow',           type=str,       default="",                 help='')
 
 args = parser.parse_args()
 
-config.debug=args.verbose
-file1=args.file
-use_file=False if (file1 == "") else True
-url=args.url
-use_url=False if (url == "") else True
-config.path=args.dir
-config.relative=False if (config.relative == "") else True
-config.absolutepath=args.da
-config.relative=True if (config.absolutepath == "") else False
+config.debug = args.verbose
+#File
+file1 = args.file
+use_file = False if (file1 == "") else True
+#URL
+url = args.url
+use_url = False if (url == "") else True
+#Path
+config.relative = True if (config.relativepath != args.dir) else False
+config.absolutepath = args.da
+config.relativepath = args.dir
 
-#use_file = use_url = False
-#file = url = ""
 
 def start(response):
     burpconverter.httpvers = "HTTP/" + str(response.raw.version)[:1] + "." + str(response.raw.version)[1:]  # workaround for showing the http-version

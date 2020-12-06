@@ -8,7 +8,7 @@ def create_finding(type, text, code, suffix=""):
     filename = type
     if (suffix != ""): filename += "." + suffix
 
-    if (config.relative): path = str(pathlib.Path().absolute()) + "/" + config.path
+    if (config.relative): path = str(pathlib.Path().absolute()) + "/" + config.relativepath
     else: path = config.absolutepath
 
     if (config.debug): print("Path = " + path)

@@ -8,7 +8,7 @@ vfy=True #check for proxy certificate
 
 # relative path to the folder where the output is going to be written. Remember: it overwrites files with same name!
 relative = True # Set to false, if you always want to go to a specific absolute path
-path = ""
+relativepath = ""
 absolutepath = ""
 output = True # set to false if you do not want to save the output
 
