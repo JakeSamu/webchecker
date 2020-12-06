@@ -32,6 +32,7 @@ soon.add_argument('-p', '--port',       type=str,       default="",             
 soon.add_argument('-c', '--clear',      type=str,       default="",                 help='Use this if the target is not using TLS or SSL')
 soon.add_argument('--interactive',      type=str,       default="",                 help='(Dachte dabei an soetwas wie bei jedem einzelnen Finding ja nein drücken, oder auch paramter dabei zu ändern ... ist natürlich viel Aufwand ...')
 soon.add_argument('--proxy',            type=str,       default="",                 help='')
+soon.add_argument('--proxy-tls',        type=bool,      default=config.tls,         help='')
 soon.add_argument('--redirect',         type=str,       default="",                 help='')
 soon.add_argument('--follow',           type=str,       default="",                 help='')
 
