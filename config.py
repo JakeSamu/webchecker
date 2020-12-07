@@ -15,14 +15,14 @@ absolutepath = ""
 
 # Default parameters for the web calls
 method = "GET"
-redirect = False
-interactive = False
-
-#No change yet supported
 file = ""
 url = ""
 header = "{}"
 body = ""
 tls = True
 port = 443
+
+#No change yet supported
+redirect = False
+interactive = False
 hostname = 'https://github.com/JakeSamu/StandardWebFindings'
