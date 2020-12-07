@@ -14,10 +14,10 @@ def set_file(file):
     # ToDo: this assumes port 443, change it corresponding to input, eventually plaintext?
     if (config.tls):
         url = "https://"
-        if (config.tls_port != 443): url += ":" + config.tls_port
+        if (config.port != 443): url += ":" + config.port
     else:
         url = "http://"
-        if (config.p_port != 80): url += ":" + config.p_port
+        if (config.port != 80): url += ":" + config.port
     config.url = url + config.header["Host"]
     if config.url[-1] == "/": config.url = config.url[:-1] + urlpath
     else: config.url += urlpath

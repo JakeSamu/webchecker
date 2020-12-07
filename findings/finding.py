@@ -8,13 +8,13 @@ def create_finding(type, text, code, suffix=""):
     filename = type
     if (suffix != ""): filename += "." + suffix
 
-    if (config.relative): path = str(pathlib.Path().absolute()) + "/" + config.relativepath
-    else: path = config.absolutepath
+    if (config.relative): path = pathlib.Path().absolute() / config.relativepath
+    else: path = pathlib.Path(config.absolutepath)
 
     if (config.debug): print("Path = " + path)
 
     if config.output:
-        with open(path + "/" + filename, "w") as f:
+        with open(path / filename, "w") as f:
             f.write(template.template_start + text + "\n\n" + code + template.template_end)
 
 def check_for_findings(request, response):

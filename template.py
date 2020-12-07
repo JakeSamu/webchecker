@@ -15,4 +15,4 @@ template_start = ""
 template_end = ""
 
 maxbodylines = 7
-maxbodycharacters = 100
+maxbodycharacters = 50

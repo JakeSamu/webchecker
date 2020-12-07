@@ -1,4 +1,6 @@
-debug=False #set to True if you want to have debugging output
+debug=False #set to True if you want to have debugging/verbose comments
+output = True # set to false if you do not want to save the output
+
 proxy=False #set to True, if you want to use the proxy defiend in proxyip
 proxies = { #set to the IPs of the proxy if you want to use it
     'http': 'http://127.0.0.1:8080',
@@ -10,18 +12,17 @@ vfy=True #check for proxy certificate
 relative = True # Set to false, if you always want to go to a specific absolute path
 relativepath = ""
 absolutepath = ""
-output = True # set to false if you do not want to save the output
 
 # Default parameters for the web calls
 method = "GET"
 redirect = False
+interactive = False
 
 #No change yet supported
 file = ""
 url = ""
-header = {}
+header = "{}"
 body = ""
 tls = True
-tls_port = 443
-p_port = 80
+port = 443
 hostname = 'https://github.com/JakeSamu/StandardWebFindings'
