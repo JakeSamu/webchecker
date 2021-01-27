@@ -11,12 +11,12 @@ def highlighting(text, highlightline=[""], highlightword=[""]):
     tmp = text
     if (not highlightword == [""]):
         for ele in highlightword:
-            tmp = highlight_word(text, ele)
-            tmp = tmp[:-1]
+            tmp = highlight_word(tmp, ele)
     if (not highlightline == [""]):
         for ele in highlightline:
-            tmp = highlight_line(text, ele)
-            tmp = tmp[:-1]
+            tmp = highlight_line(tmp, ele)
+    #check for doubled marks
+    tmp = remove_doubled_highlight(tmp)
     return tmp
 
 def create_request(request, title="Request:", highlightline=[""], highlightword=[""]):
@@ -50,6 +50,18 @@ def highlight_ifall_inline(code, highlight):
         else:
             output = line + "\n"
     return output
+
+def remove_doubled_highlight(text):
+    tmp1 = text
+    tmp2 = text.replace(template.highlight_start + template.highlight_start, template.highlight_start)
+    tmp2 = text.replace(template.highlight_end + template.highlight_end, template.highlight_end)
+
+    while (tmp1 != tmp2):
+        tmp1 = tmp2
+        tmp2 = tmp1.replace(template.highlight_start+template.highlight_start, template.highlight_start)
+        tmp2 = tmp1.replace(template.highlight_end + template.highlight_end, template.highlight_end)
+
+    return tmp2
 
 #ToDo: remove empty lines between header and body
 def create_both(request, response, highlightline=[""], highlightword=[""], reqtitle="Request:", resptitle="Response:"):
