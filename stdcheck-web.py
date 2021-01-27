@@ -16,27 +16,31 @@ def str2bool(v):
     else:
         raise argparse.ArgumentTypeError('Boolean value expected.')
 
-parser = argparse.ArgumentParser()
+parser = argparse.ArgumentParser(description="Stdcheck-Web")
 
-parser.add_argument('-f', '--file',         type=str,       default=config.file,        help='Use a file that contains a copy of burp request')
-parser.add_argument('-u', '--url',          type=str,       default=config.url,         help='Standard webcall to given url')
-parser.add_argument('-v', '--verbose',      type=str2bool,  default=config.debug,       help='Detailed output', nargs='?', const=True)
-parser.add_argument('-dr', '--dir',         type=str,       default=config.relativepath,help='Define the directory which is used to save all the files into via relative path.\nDefault is the current directory.')
-parser.add_argument('-da',                  type=str,       default=config.absolutepath,help='Define the directory per absolute path instead of relative path.')
-parser.add_argument('-n', '--no-output',    type=str2bool,  default=config.output,      help='Set to true if files shall be generated.', nargs='?', const=True)
-parser.add_argument('-r', '--redirect',     type=str2bool,  default=config.redirect,    help='Use this to follow redirections.', nargs='?', const=True)
-parser.add_argument('-m', '--method',       type=str,       default=config.method,      help='Only works with usage of url, defines the method.\nDefault is GET')
-parser.add_argument('--header',             type=json.loads,default=config.header,      help='Add the header of the request as a dictionary.\nOnly compatible with -u.')
-parser.add_argument('--body',               type=str,       default=config.body,        help='Define the body of the request as a string.\nOnly compatible with -u.')
-parser.add_argument('-p', '--port',         type=str,       default=config.port,        help='Only works with usage of -f, use this if the standard port is not in use (443 for https, 80 for http)')
-parser.add_argument('--tls',                type=str2bool,  default=config.tls,         help='Set to False if endpoint is not using TLS.\nDefault is ' + str(config.tls) + '\nOnly compatible with -f')
-parser.add_argument('--proxy-tls',          type=str2bool,  default=config.vfy,         help='Use this to check for the proxy certificate.', nargs='?', const=True)
-parser.add_argument('--proxy',              type=str2bool,  default=config.proxy,       help='Proxy IP is defined in the config file. This parameter is just to turn it on or off.', nargs='?', const=True)
+optional = parser._action_groups.pop()
+required = parser.add_argument_group("exactly one of these arguments")
 
+required.add_argument('-u', '--url',          type=str,       default=config.url,         help='Standard webcall to given url')
+required.add_argument('-f', '--file',         type=str,       default=config.file,        help='Use a file that contains a copy of burp request')
+
+optional.add_argument('-v', '--verbose',      type=str2bool,  default=config.debug,       help='Detailed output', nargs='?', const=True)
+optional.add_argument('-dr', '--dir',         type=str,       default=config.relativepath,help='Define the directory which is used to save all the files into via relative path.\nDefault is the current directory.')
+optional.add_argument('-da',                  type=str,       default=config.absolutepath,help='Define the directory per absolute path instead of relative path.')
+optional.add_argument('-n', '--no-output',    type=str2bool,  default=config.output,      help='Set to true if files shall be generated.', nargs='?', const=True)
+optional.add_argument('-r', '--redirect',     type=str2bool,  default=config.redirect,    help='Use this to follow redirections.', nargs='?', const=True)
+optional.add_argument('-m', '--method',       type=str,       default=config.method,      help='Only works with usage of url, defines the method.\nDefault is GET')
+optional.add_argument('--header',             type=json.loads,default=config.header,      help='Add the header of the request as a dictionary.\nOnly compatible with -u.')
+optional.add_argument('--body',               type=str,       default=config.body,        help='Define the body of the request as a string.\nOnly compatible with -u.')
+optional.add_argument('-p', '--port',         type=str,       default=config.port,        help='Only works with usage of -f, use this if the standard port is not in use (443 for https, 80 for http)')
+optional.add_argument('--tls',                type=str2bool,  default=config.tls,         help='Set to False if endpoint is not using TLS.\nDefault is ' + str(config.tls) + '\nOnly compatible with -f')
+optional.add_argument('--proxy-tls',          type=str2bool,  default=config.vfy,         help='Use this to check for the proxy certificate.', nargs='?', const=True)
+optional.add_argument('--proxy',              type=str2bool,  default=config.proxy,       help='Proxy IP is defined in the config file. This parameter is just to turn it on or off.', nargs='?', const=True)
+parser._action_groups.append(optional)
 
 #Implement from top to down in this order
 soon = parser.add_argument_group('Coming soon')
-soon.add_argument('-i', '--interactive',  type=str2bool,  default=config.interactive, help='(Dachte dabei an soetwas wie bei jedem einzelnen Finding ja nein drücken, oder auch paramter dabei zu ändern ... ist natürlich viel Aufwand ...')
+soon.add_argument('-i', '--interactive',  type=str2bool,  default=config.interactive, help='(Idea to have an interactive mode to check every finding and click at every point to use it or not.)')
 
 
 args = parser.parse_args()
