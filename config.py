@@ -1,4 +1,4 @@
-debug=False #set to True if you want to have debugging/verbose comments
+debug = False #set to True if you want to have debugging/verbose comments
 output = True # set to false if you do not want to save the output
 
 proxy=False #set to True, if you want to use the proxy defiend in proxyip
@@ -25,4 +25,4 @@ port = 443
 #No change yet supported
 redirect = False
 interactive = False
-hostname = 'https://github.com/JakeSamu/StandardWebFindings'
+hostname = 'github.JakeSamu.StandardWebFindings'

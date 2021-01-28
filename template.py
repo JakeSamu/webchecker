@@ -1,5 +1,10 @@
+#general values
+maxbodylines = 7
+maxbodycharacters = 50
+
+
 # dradis values
-dradis=True
+dradis = True
 bold_start = "*"
 bold_end = "*"
 
@@ -15,5 +20,3 @@ highlight_end = "</mark>"
 template_start = ""
 template_end = ""
 
-maxbodylines = 7
-maxbodycharacters = 50
