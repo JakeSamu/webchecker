@@ -1,5 +1,5 @@
 # dradis values
-dradis=True
+dradis = True
 bold_start = "*"
 bold_end = "*"
 
