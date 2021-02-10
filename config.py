@@ -18,12 +18,13 @@ config['absolutepath'] = ""
 config['method'] = "GET"
 config['file'] = ""
 config['url'] = ""
+config['hostname'] = ""
 config['header'] = "{}"
 config['body'] = ""
 config['tls'] = True
 config['port'] = 443
+config['redirect'] = False
+config['hostname-test'] = 'github.JakeSamu.StandardWebFindings'
 
 # No change yet supported
-config['redirect'] = False
 config['interactive'] = False
-config['hostname'] = 'github.JakeSamu.StandardWebFindings'

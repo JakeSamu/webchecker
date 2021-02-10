@@ -2,22 +2,23 @@ import findings
 import config
 import template
 import pathlib
+from config import config
 
 def create_finding(type, text, code, suffix=""):
     print(" found " + type + " ...", end='')
     filename = type
     if (suffix != ""): filename += "." + suffix
 
-    if (config.config['relative']): path = pathlib.Path().absolute() / config.config['relativepath']
-    else: path = pathlib.Path(config.config['absolutepath'])
+    if (config['relative']): path = pathlib.Path().absolute() / config['relativepath']
+    else: path = pathlib.Path(config['absolutepath'])
 
-    if (config.config['debug']): print("Path = " + path)
+    if (config['debug']): print("Path = " + path)
 
     #dradis-workaround
     if (template.dradis):
         if ("p." in code[-4:]): code = code[:-4]
 
-    if config.config['output']:
+    if config['output']:
         with open(path / filename, "w") as f:
             f.write(template.template_start + text + "\n\n" + code + template.template_end)
 

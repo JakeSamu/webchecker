@@ -1,5 +1,6 @@
 from main import *
 from findings import finding
+from main import format
 import findings.lists.infodisclist
 import template
 

@@ -1,12 +1,13 @@
-import config
-from main import *
+from config import config
 from findings import finding
 import template
+from main import webcall
+from main import format
 
 
 corsheader = "Access-Control-Allow-Origin"
 credheader = "Access-Control-Allow-Credentials"
-dependencyheader = config.config['hostname']
+dependencyheader = config['hostname']
 
 text_origin1 = "In dem folgenden HTTP-Request mitsamt Response ist zu sehen, dass der Header "+template.cursive_start+corsheader+template.cursive_end+" ein Wildcard enthält und somit beliebige Origins erlaubt."
 text_origin2 = "In dem folgenden HTTP-Request mitsamt Response ist zu sehen, dass der Header "+template.cursive_start+corsheader+template.cursive_end+" denselben Wert wie in der Response überträgt und somit beliebige Origins erlaubt."

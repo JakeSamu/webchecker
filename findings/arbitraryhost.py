@@ -1,10 +1,11 @@
-import config
+from config import config
 from findings import finding
+from main import format
 
 # ToDo: assume everytime that host header is set. then call another time and compare status response and body
 from main import webcall
 
-text = "Die folgenden HTTP Requests mitsamt Response zeigen auf, dass trotz unterschiedlichem Host Header, die Response die gleiche ist. Auch wenn keine direkte Möglichkeit gefunden wurde diese Schwachstelle auszunutzen, so ist es empfehelenswert, den Host Header zu überprüfen."
+text = "Die folgenden HTTP-Requests mitsamt Response zeigen auf, dass trotz unterschiedlichem Host-Header, die Response die gleiche ist. Auch wenn keine direkte Möglichkeit gefunden wurde diese Schwachstelle auszunutzen, so ist es empfehlenswert, den Host Header zu überprüfen."
 
 
 # This checks if the length is the same and if at least 90% of those lines are the same
@@ -36,7 +37,7 @@ def compare(response1, response2):
 def check_hostheader(request, response):
     print("... checking for arbitrary host header ...", end='')
 
-    addheader = {'Host': config.config['hostname']}
+    addheader = {'Host': config['hostname-test']}
     response2 = webcall.call(addheader)
     highlight = ["Host: "]
 
