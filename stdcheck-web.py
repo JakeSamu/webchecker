@@ -116,9 +116,10 @@ def main():
     else:
         path = pathlib.Path(config['absolutepath'])
     if not pathlib.Path.exists(path):
-        create = str2bool(input("Your given directory does not exists. Do you want to create it? (Y/n)"))
+        print("Your given directory '"+str(path)+"' does not exists.")
+        create = str2bool(input("Do you want to create it? (Y/n)"))
         if create:
-            os.mkdir(path)
+            path.mkdir(parents=True, exist_ok=True)
         else:
             exit(1)
 
