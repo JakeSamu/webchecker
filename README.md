@@ -1,6 +1,6 @@
 # Usage
 
-Use the script without parameters to get help: python3 stdwebcheck.py
+Use the script without parameters to get help: python3 webchecker.py
 
 This script will save files on your current directory if not used with parameters _-dr_ or _-da_. The text written in those files to explain a bit what is going to be seen there is written in german and are not selfexplanatory without the context and background of the corresponding security issues.
 
