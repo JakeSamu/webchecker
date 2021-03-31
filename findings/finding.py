@@ -30,4 +30,5 @@ def check_for_findings(request, response):
     findings.infodisc.info_disc(request, response)
     findings.cors.check_cors(request, response)
     findings.arbitraryhost.check_hostheader(request, response)
+    findings.xssfilter.check_xssfilter(request, response)
     print("... done")

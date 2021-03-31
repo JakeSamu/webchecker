@@ -4,15 +4,6 @@ from main import format
 import findings.lists.infodisclist
 import template
 
-#ToDo: check if a header exists:
-# X-AspNet-Version
-# X-AspNetMvc-Version
-# Server
-# 'nginx/' hat dann sogar die Version
-# X-Powered-By
-# MicrosoftSharePointTeamServices
-#
-
 #ToDo: check if something is in body:
 # keycloak/auth/resources/%versionsnummer/admin/keycloak
 # Apache Tomcat/
