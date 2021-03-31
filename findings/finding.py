@@ -3,6 +3,7 @@ import config
 import template
 import pathlib
 from config import config
+from main.str2bool import str2bool
 
 def create_finding(type, text, code, suffix=""):
     print(" found " + type + " ...", end='')
@@ -25,10 +26,20 @@ def create_finding(type, text, code, suffix=""):
 def check_for_findings(request, response):
     print("Starting the web calls and checking for findings ...")
     #Call every finding-script here
-    findings.cookies.check_cookies(request, response)
-    findings.hsts.check_hsts(request, response)
-    findings.infodisc.info_disc(request, response)
-    findings.cors.check_cors(request, response)
-    findings.arbitraryhost.check_hostheader(request, response)
-    findings.xssfilter.check_xssfilter(request, response)
+    
+    findinglist = {
+                   'cookie flags': findings.cookies.check_cookies,
+                   'HSTS': findings.hsts.check_hsts,
+                   'information disclosures': findings.infodisc.info_disc,
+                   'CORS': findings.cors.check_cors,
+                   'host header': findings.arbitraryhost.check_hostheader,
+                   'xssfilter': findings.xssfilter.check_xssfilter
+                  }
+    
+    for (name,func) in findinglist.items():
+        if (config['interactive']):
+            create = str2bool(input("Do you want to check "+name+"? (Y/n)"))
+            if create:
+                func(request, response)
+    
     print("... done")

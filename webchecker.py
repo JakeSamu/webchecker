@@ -7,18 +7,7 @@ import pathlib
 from main import burpconverter, webcall
 from config import config
 import urllib3
-
-
-# Allow several arguments besides True and False
-def str2bool(v):
-    if isinstance(v, bool):
-        return v
-    if v.lower() in ('yes', 'true', 't', 'y', '1'):
-        return True
-    elif v.lower() in ('no', 'false', 'f', 'n', '0'):
-        return False
-    else:
-        raise argparse.ArgumentTypeError('Boolean value expected.')
+from main.str2bool import str2bool
 
 
 def start(response):
@@ -65,12 +54,12 @@ def main():
     optional.add_argument('--proxy', type=str2bool, default=config['proxy'],
                           help='Proxy IP is defined in the config[\'file\']. This parameter is just to turn it on or off.',
                           nargs='?', const=True)
+    optional.add_argument('-i', '--interactive', type=str2bool, default=config['interactive'],
+                          help='Set this to True if you want to use interactive mode.')
     parser._action_groups.append(optional)
 
     # Implement from top to down in this order
     soon = parser.add_argument_group('Coming soon')
-    soon.add_argument('-i', '--interactive', type=str2bool, default=config['interactive'],
-                      help='(Idea to have an interactive mode to check every finding and click at every point to use it or not.)')
 
     args = parser.parse_args()
 
@@ -78,9 +67,13 @@ def main():
     config['debug'] = args.verbose
     config['output'] = args.no_output
     config['redirect'] = args.redirect
+    config['redirect'] = args.redirect
     # Proxy
     config['proxy'] = args.proxy
     config['vfy'] = args.proxy_tls
+    
+    #Interactive mode
+    config['interactive'] = args.interactive
 
     # File
     config['file'] = args.file
