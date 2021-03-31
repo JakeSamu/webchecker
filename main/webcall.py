@@ -49,6 +49,8 @@ def call(addheader={}):
     headers = config['header'].copy()
     headers.update({'Host': config['hostname']})
     headers.update(addheader)
+    
+    print("Calling webchecker on "+config['url'])
 
     try:
         response = requests.request(config['method'], config['url'], headers=headers, data=config['body'],
