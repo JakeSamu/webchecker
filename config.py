@@ -11,7 +11,7 @@ config['vfy'] = True  # check for proxy certificate
 
 # relative path to the folder where the output is going to be written. Remember: it overwrites files with same name!
 config['relative'] = True  # Set to false, if you always want to go to a specific absolute path
-config['relativepath'] = ""
+config['relativepath'] = "output"
 config['absolutepath'] = ""
 
 # Default parameters for the web calls

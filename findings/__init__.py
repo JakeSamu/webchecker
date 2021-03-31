@@ -7,3 +7,4 @@ import findings.finding
 import findings.hsts
 import findings.infodisc
 #import findings.sessionfixation
+import findings.xssfilter

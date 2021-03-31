@@ -91,7 +91,7 @@ def main():
         print("You have given both, an url and a file. Please only use one of both.")
         exit(0)
     # Path
-    config['relative'] = True if (config['relativepath'] != args.dir) else False
+    config['relative'] = False if (config['absolutepath'] != args.da) else True
     config['relativepath'] = args.dir
     config['absolutepath'] = args.da
 
@@ -132,6 +132,7 @@ def main():
     if (use_file):
         webcall.set_file(config['file'])
     else:
+        print("Calling webchecker on "+config['url'])
         webcall.set_url(config['url'])
     response = webcall.call()
     start(response)

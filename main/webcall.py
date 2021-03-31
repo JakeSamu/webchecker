@@ -50,8 +50,6 @@ def call(addheader={}):
     headers.update({'Host': config['hostname']})
     headers.update(addheader)
     
-    print("Calling webchecker on "+config['url'])
-
     try:
         response = requests.request(config['method'], config['url'], headers=headers, data=config['body'],
                                 proxies=config['proxies'], verify=config['vfy'], allow_redirects=config['redirect'])

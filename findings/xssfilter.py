@@ -9,8 +9,7 @@ def check_xssfilter(request, response):
 
     if 'X-XSS-Protection' in response.headers:
     	if (response.headers.get("X-XSS-Protection") == 0):
-    	    highlight = "X-XSS-Protection: 0"
-            code = format.create_both(request, response, highlight)
+            code = format.create_both(request, response, "X-XSS-Protection: 0")
             finding.create_finding("xss-filter-disabled", text, code)
 
     print("")
