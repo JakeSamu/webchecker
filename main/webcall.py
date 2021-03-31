@@ -50,6 +50,10 @@ def call(addheader={}):
     headers.update({'Host': config['hostname']})
     headers.update(addheader)
 
-    response = requests.request(config['method'], config['url'], headers=headers, data=config['body'],
+    try:
+        response = requests.request(config['method'], config['url'], headers=headers, data=config['body'],
                                 proxies=config['proxies'], verify=config['vfy'], allow_redirects=config['redirect'])
+    except OSError:
+       print("Name or service not known")
+       quit()
     return response
