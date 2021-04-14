@@ -15,3 +15,6 @@ This script is primarily intended for security analysts and penetration tester. 
 * Cookies
 * HSTS
 * Obvious information disclosures
+
+# Dependencies
+See requirements.txt and have python3-pip installed.
