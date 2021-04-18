@@ -14,7 +14,7 @@ This script is primarily intended for security analysts and penetration tester. 
 * CORS settings
 * Cookies
 * HSTS
-* Obvious information disclosures
+* Obvious information disclosures (in header only)
 
 # Dependencies
 See requirements.txt and have python3-pip installed.
